@@ -1,0 +1,72 @@
+html,body{
+    height: 100%;
+}
+body{
+    margin: 0;
+    background: #cecece;
+    position: relative;
+    font-size: 12px; 
+}
+$topH: 40px;
+$rightW: 1336px - 1024px;
+$borderColor: #afafaf;
+
+.wrap{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: $topH $rightW 0 0;
+    overflow: hidden;
+}
+@mixin currentTab {
+    box-shadow: 0 0 5px gray inset;
+}
+.top{
+    position: absolute;
+    left: 0;
+    right: $rightW + 1px;
+    top: 0;
+    height: $topH;
+    border-bottom: 1px solid $borderColor;
+    line-height: $topH;
+    font-size: 0;
+    .tab-head{
+        display: inline-block;
+        width: 120px;
+        height: 100%;
+        border-right: 1px solid $borderColor;
+        font-size: 12px;
+        cursor: pointer;
+        &:hover, 
+        &.current{
+            @include currentTab;
+        }
+    }
+}
+.right{
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: $rightW;
+    border-left: 1px solid $borderColor;
+}
+.left{
+    position: absolute;
+    left: 0;
+    right: $rightW + 1px;
+    top: $topH + 1px;
+    bottom: 0;
+    .frame,webview{
+        height: 100%;
+        width: 100%;
+    }
+    .tab-content{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        display: none;
+    }
+}
