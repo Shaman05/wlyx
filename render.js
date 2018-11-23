@@ -1,4 +1,5 @@
 //render
+const { ipcRenderer } = require('electron');
 const path = require('path');
 const bs = require("browser-sync");
 const fetch = require('./fetch');
@@ -19,10 +20,15 @@ module.exports = function (config) {
             password: ''
         }
     }, result=> {
+        if(!result){
+            return createLocalhost(null, ()=> {
+                setTab(0);
+            });
+        }
         console.log(result.statusCode);
         let cookies = result.headers['set-cookie'];
         console.log(cookies);
-        createLocalhost(cookies, function(){
+        createLocalhost(cookies, ()=> {
             setTab(0);
         });
     });
@@ -46,17 +52,20 @@ module.exports = function (config) {
         let $currentTabC = $left.find('.tab-content').hide().removeClass('current').eq(index).addClass('current').show();
         let $frame = $currentTabC.find('webview');
         if ($frame.size() < 1) {
-            $frame = $(`<webview src="http://www.site-808${index}.com/" plugins preload="./static/js/cookie.js"></webview>`);
+            $frame = $(`<webview src="http://s212.hero.9wee.com/" plugins partition="hero${index}"></webview>`);
             $frame.appendTo($currentTabC);
             let webview = $frame[0];
-            
             webview.addEventListener('dom-ready', () => {
                 webview.openDevTools();
+                //ipcRenderer.send('new win');
             });
         }
     }
 
     function createLocalhost(cookies, callback) {
+        if(!cookies){
+            return callback();
+        }
         let proxy = bs.create(`wlyx-proxy`);
         proxy.init({
             ui: false,

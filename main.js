@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -18,7 +18,7 @@ function createWindow() {
     mainWindow.loadFile('index.html')
 
     // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools()
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
@@ -50,3 +50,18 @@ app.on('activate', function () {
         createWindow()
     }
 })
+
+// ipcMain.on('new win', (event, arg) => {
+
+//     // Create the browser window.
+//     mainWindow = new BrowserWindow({ 
+//         width: 1336, 
+//         height: 768,
+//         minWidth: 1336,
+//         minHeight: 768,
+//         resizable: false
+//     })
+
+//     // and load the index.html of the app.
+//     mainWindow.loadURL('http://s212.hero.9wee.com/')
+// });

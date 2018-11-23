@@ -1,6 +1,7 @@
 const request = require('request');
 
 function requestData(params, cb) {
+    return cb(null);
     let {method, url, data, form, isForm} = params;
     let options = {
         method: method || 'GET',
