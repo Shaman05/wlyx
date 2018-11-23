@@ -56,8 +56,10 @@ module.exports = function (config) {
             $frame.appendTo($currentTabC);
             let webview = $frame[0];
             webview.addEventListener('dom-ready', () => {
-                webview.openDevTools();
+                //webview.openDevTools();
                 //ipcRenderer.send('new win');
+                let title = webview.getTitle();
+                $tabs.eq(index).text(title).attr('title', title);
             });
         }
     }
@@ -92,5 +94,7 @@ module.exports = function (config) {
         });
     }
 
+    function setTitle(index, title){
 
+    }
 }

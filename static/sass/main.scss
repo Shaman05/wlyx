@@ -39,6 +39,10 @@ $borderColor: #afafaf;
         border-right: 1px solid $borderColor;
         font-size: 12px;
         cursor: pointer;
+        text-indent: 12px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
         &:hover, 
         &.current{
             @include currentTab;

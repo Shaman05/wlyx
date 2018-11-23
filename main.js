@@ -1,4 +1,20 @@
+
+const path = require('path');
 const { app, BrowserWindow, ipcMain } = require('electron')
+
+/**
+C:\Windows\System32\Macromed\Flash\pepflashplayer64_23_0_0_207.dl 
+C:\Windows\SysWOW64\Macromed\Flash\pepflashplayer32_23_0_0_207.dll
+ */
+//此处仅兼容了Windows 的 32位 与 64位
+const pepflashplayer = (process.arch == 'x64') ? 
+    path.join(__dirname, `plugins`, `pepflashplayer64_27_0_0_183.dll`):
+    path.join(__dirname, `plugins`, `pepflashplayer32_27_0_0_183.dll`);
+//设定插件
+app.commandLine.appendSwitch('ppapi-flash-path', pepflashplayer);
+//设定插件版本（不知道是否真有用，不匹配貌似也能运行）
+app.commandLine.appendSwitch('ppapi-flash-version', '27.0.0.183');
+
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
