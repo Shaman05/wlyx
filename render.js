@@ -1,8 +1,4 @@
 //render
-const { ipcRenderer } = require('electron');
-const path = require('path');
-const bs = require("browser-sync");
-const fetch = require('./fetch');
 
 module.exports = function (config) {
     let $tabs = $('.tab-head');
@@ -17,26 +13,6 @@ module.exports = function (config) {
         }
         createTabContent();
         setTab(0);
-        // fetch({
-        //     method: 'POST',
-        //     url: 'http://passport.9wee.com/login',
-        //     form: {
-        //         username: '',
-        //         password: ''
-        //     }
-        // }, result => {
-        //     if (!result) {
-        //         return createLocalhost(null, () => {
-        //             setTab(0);
-        //         });
-        //     }
-        //     console.log(result.statusCode);
-        //     let cookies = result.headers['set-cookie'];
-        //     console.log(cookies);
-        //     createLocalhost(cookies, () => {
-        //         setTab(0);
-        //     });
-        // });
     });
 
 
@@ -76,37 +52,6 @@ module.exports = function (config) {
                 $toolbar.appendTo($currentTabC);
             });
         }
-    }
-
-    function createLocalhost(cookies, callback) {
-        if (!cookies) {
-            return callback();
-        }
-        let proxy = bs.create(`wlyx-proxy`);
-        let targetURL = `http://s212.hero.9wee.com/passport.php?act=login&referer=/`;
-        proxy.init({
-            ui: false,
-            open: false,
-            ghostMode: false,
-            port: 80,
-            proxy: {
-                target: targetURL,
-                middleware: [function (req, res, next) {
-                    res.setHeader("access-control-allow-origin", '*');
-                    res.setHeader("X-proxy-server", 'wlyx-app');
-                    res.setHeader("X-proxy-server-power-by", 'Browsersync');
-                    res.setHeader('Set-Cookie', cookies);
-                    next();
-                }]
-            }
-        }, function (err, bs) {
-            if (err) {
-                return console.log(err);
-            }
-            let urls = bs.options.getIn(['urls']);
-            console.log(urls);
-            callback && callback();
-        });
     }
 
     function setTitle(index, title) {

@@ -8,11 +8,7 @@
     "dev": "E:/electron-v3.0.0-win32-x64/electron.exe ."
   },
   "license": "ISC",
-  "dependencies": {
-    "browser-sync": "^2.18.12",
-    "jquery": "^3.3.1",
-    "request": "^2.83.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "electron-packager": "^12.2.0"
   }
