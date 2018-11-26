@@ -15,9 +15,6 @@ module.exports = function (config) {
         setTab(0);
     });
 
-
-
-
     function createTabContent() {
         $left.empty();
         $.each($tabs, (index, tab) => {
@@ -46,15 +43,16 @@ module.exports = function (config) {
             });
             webview.addEventListener('dom-ready', () => {
                 //webview.openDevTools();
-                //ipcRenderer.send('new win');
-                let title = webview.getTitle();
-                $tabs.eq(index).text(title).attr('title', title);
                 $toolbar.appendTo($currentTabC);
+                setInterval(function(){
+                    let title = webview.getTitle();
+                    setTitle(index, title);
+                }, 1000);
             });
         }
     }
 
     function setTitle(index, title) {
-
+        $tabs.eq(index).text(title).attr('title', title);
     }
 }
