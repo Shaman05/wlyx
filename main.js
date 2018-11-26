@@ -27,6 +27,7 @@ function createWindow() {
         height: 768,
         minWidth: 1336,
         minHeight: 768,
+        icon: path.join(__dirname, 'static/images/favicon.ico'),
         resizable: true
     })
 

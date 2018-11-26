@@ -32,6 +32,13 @@ $borderColor: #afafaf;
     border-bottom: 1px solid $borderColor;
     line-height: $topH;
     font-size: 0;
+    overflow: hidden;
+    .area{
+        display: block;
+        float: left;
+        padding: 5px 10px 0;
+        border-right: 1px solid $borderColor;
+    }
     .tab-head{
         display: inline-block;
         width: 120px;
@@ -72,5 +79,23 @@ $borderColor: #afafaf;
         height: 100%;
         width: 100%;
         display: none;
+        .tools{
+            position: absolute;
+            left: 0;
+            bottom: 30px;
+            height: 20px;
+            overflow: hidden;
+            z-index: 9999;
+            span{
+                display: inline-block;
+                height: 20px;
+                line-height: 20px;
+                padding: 0 10px;
+                cursor: pointer;
+                box-shadow: 0 0 4px red inset;
+                margin-left: 5px;
+                background: #fff;
+            }
+        }
     }
 }
