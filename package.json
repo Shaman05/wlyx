@@ -5,7 +5,8 @@
   "author": "shaman",
   "description": "tool",
   "scripts": {
-    "dev": "E:/electron-v3.0.0-win32-x64/electron.exe ."
+    "dev": "E:/electron-v3.0.0-win32-x64/electron.exe .",
+    "app": "E:/electron-v2.0.0-win32-ia32/electron.exe ."
   },
   "license": "ISC",
   "dependencies": {},
