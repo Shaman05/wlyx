@@ -1,10 +1,15 @@
 //render
 
 module.exports = function (config) {
+    let {users, password} = config;
     let $tabs = $('.tab-head');
     let $left = $('#left');
     let $area = $('#area');
+    let $users = $('#users');
     let area = 'none';
+    let user = 'none';
+
+    loadUsers(users);
 
     $area.on('change', function () {
         area = $(this).val();
@@ -14,6 +19,43 @@ module.exports = function (config) {
         createTabContent();
         setTab(0);
     });
+
+    $users.on('change', function () {
+        user = $(this).val();
+        if(user === 'none'){
+            return false;
+        }
+        let webview = $left.find('.tab-content.current').find('webview')[0];
+        if(webview){
+            //webview.executeJavaScript(`_Set_login_user("${user}", "${password}")`);
+            webview.executeJavaScript(`
+            function _Set_login_user(user, password) {
+                let loginForm = _$Id('login_form');
+                let nameInput = _GetElemByName('username', loginForm);
+                let pwdInput = _GetElemByName('password', loginForm);
+                nameInput.value = user;
+                pwdInput.value = password;
+            }
+            function _$Id(id) {
+                return document.getElementById(id);
+            }
+            function _GetElemByName(name, context) {
+                if(context){
+                    return  context.querySelector('[name=' + name + ']');
+                }
+                return document.querySelector('[name=' + name + ']');
+            }
+            _Set_login_user("${user}", "${password}");
+            `);
+        }
+    });
+
+    function loadUsers(users){
+        users.map((user, index)=> {
+            let $userOption = $(`<option value="${user}">${user}</option>`);
+            $userOption.appendTo($users);
+        });
+    }
 
     function createTabContent() {
         $left.empty();
@@ -42,7 +84,7 @@ module.exports = function (config) {
                 webview && webview.reload(true);
             });
             webview.addEventListener('dom-ready', () => {
-                //webview.openDevTools();
+                webview.openDevTools();
                 $toolbar.appendTo($currentTabC);
                 setInterval(function(){
                     let title = webview.getTitle();

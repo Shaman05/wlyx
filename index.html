@@ -10,17 +10,22 @@
 <body>
     <div class="wrap">
         <div class="top" id="top">
-            <label for="area" class="area">
-                <select name="" id="area">
-                    <option value="none">请先选择大区</option>
-                    <!-- <option value="s213">双线213区</option> -->
-                    <option value="s212">双线212区</option>
-                    <option value="s206">双线206区</option>
-                </select>
-            </label>
-            <div class="tab-head">
-
+            <div class="config">
+                <label for="area" class="area">
+                    <select name="" id="area">
+                        <option value="none">请先选择大区</option>
+                        <!-- <option value="s213">双线213区</option> -->
+                        <option value="s212">双线212区</option>
+                        <option value="s206">双线206区</option>
+                    </select>
+                </label>
+                <label for="users" class="users">
+                    <select name="" id="users">
+                        <option value="none">请先选择登陆用户</option>
+                    </select>
+                </label>
             </div>
+            <div class="tab-head"></div>
             <div class="tab-head"></div>
             <div class="tab-head"></div>
             <div class="tab-head"></div>
@@ -32,8 +37,17 @@
     </div>
     <script src="./static/js/jquery.js"></script>
     <script>
-        $(function(){
-            require('./render.js')({});
+        $(function () {
+            let users = [];
+            let password = "";
+            try {
+                let userConfig = require('./_user.json');
+                users = userConfig.users;
+                password = userConfig.password;
+            } catch (e) {
+                console.warn('加载用户列表失败！');
+            }
+            require('./render.js')({ users, password });
         });
     </script>
 </body>

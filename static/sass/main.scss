@@ -33,11 +33,25 @@ $borderColor: #afafaf;
     line-height: $topH;
     font-size: 0;
     overflow: hidden;
-    .area{
-        display: block;
+    .config{
         float: left;
         padding: 5px 10px 0;
         border-right: 1px solid $borderColor;
+    }
+    .area,
+    .users{
+        display: block;
+        height: 20px;
+        select{
+            height: 18px;
+            position: relative;
+            top: -9px;
+        }
+    }
+    .users{
+        select{
+            top: -11px;
+        }
     }
     .tab-head{
         display: inline-block;
